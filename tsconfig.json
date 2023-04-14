@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "CommonJS",
+    "target": "es6",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "baseUrl": "src",
+    "lib": ["DOM", "ES5", "ES6", "es2017.object"],
+    "paths": {
+      "app/*": ["app/*"],
+      "core/*": ["core/*"],
+      "assembly/*": ["assembly/wasm/*"]
+    }
+  },
+  "include": ["src"], /// <-- Like this!!
+  "exclude": [".git", "node_modules"]
+}

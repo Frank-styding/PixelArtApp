@@ -1,0 +1,44 @@
+{
+  "command": [
+    "em++  $FILE_PATH$ -O  -s INITIAL_MEMORY=256MB -s ALLOW_MEMORY_GROWTH=1 -s ERROR_ON_UNDEFINED_SYMBOLS=0  -s EXPORTED_FUNCTIONS=[",
+    {
+      "method": "join",
+      "options": ",",
+      "value": {
+        "method": "map",
+        "value": "EXPORTED_FUNCTIONS",
+        "template": "_$DATA$"
+      }
+    },
+    "]"
+  ],
+
+  "Template::index.ts": [
+    "import { Wasm } from \"core/Wasm/Wasm\";\n",
+    "import wasmPath from \"./$FILE_NAME$.wasm\";\n",
+    "type IMethods = {\n",
+    {
+      "method": "iterStr",
+      "value": "FUNC_INFO",
+      "template": [
+        "$0$:{",
+        {
+          "method": "join",
+          "value": "$1$",
+          "options": ",",
+          "template": "args:[$DATA$];\n"
+        },
+        "res:$2:0$;\n",
+        "};\n"
+      ]
+    },
+    "}\n",
+    "const wasm = new Wasm<IMethods>('$FILE_NAME$')\n",
+    "wasm.setFile(wasmPath);\n",
+    "export default wasm;\n"
+  ],
+
+  "default_methods": ["malloc"],
+
+  "assemblyPath": ".\\src\\assembly"
+}
